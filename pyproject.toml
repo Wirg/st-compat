@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "st_compat"
+version = "0.0.1"
+description = "Module to make it easier to build streamlit modules by implementing standard retro-compatiblity"
+authors = ["Wirg"]
+license = "Apache License 2.0"
+keywords = ["streamlit", "compatibility", "compat", "st_compat", "get_script_run_ctx", "get_report_ctx"]
+readme = "README.md"
+homepage = "https://github.com/Wirg/st_compat"
+repository = "https://github.com/Wirg/st_compat"
+include = [
+    "LICENSE",
+]
+classifiers = [
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.7,<4.0.0"
+streamlit = ">=0.66"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.12.0"
+flake8 = "^5.0.4"
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0"
+pre-commit = "^2.21.0"
+isort = "^5.11.4"
+
+[tool.black]
+line-length = 127
+target-version = ['py36', 'py37', 'py38']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \venv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.pytest.ini_options]
+addopts = "-ra --cov-fail-under=15 --cov st_compat"
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
