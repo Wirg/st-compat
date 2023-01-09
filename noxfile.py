@@ -34,7 +34,7 @@ def tests(session: nox_poetry.Session, streamlit_version):
 @nox_poetry.session(python=None)
 def coverage(session: nox.Session):
     session.install("pytest", "pytest-cov", ".")
-    session.run("pytest", "--cov-fail-under=15", "--cov=stqdm", "--cov-report=xml:codecov.xml")
+    session.run("pytest", "--cov-fail-under=15", "--cov=st_compat", "--cov-report=xml:codecov.xml")
 
 
 @nox_poetry.session(python=None)
@@ -52,4 +52,4 @@ def black(session: nox.Session):
 @nox_poetry.session(python=None)
 def lint(session: nox.Session):
     session.install("pylint", "nox", "nox_poetry", "tqdm", "streamlit")
-    session.run("pylint", "stqdm", "examples", "tests", "noxfile.py")
+    session.run("pylint", "st_compat", "examples", "tests", "noxfile.py")
