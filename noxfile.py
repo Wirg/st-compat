@@ -26,8 +26,7 @@ PYTHON_ST_TQDM_VERSIONS = (
 @nox.parametrize(["python", "streamlit_version"], PYTHON_ST_TQDM_VERSIONS)
 def tests(session: nox_poetry.Session, streamlit_version):
     dependencies_to_install_with_pip: List[str] = [
-        name if version == LATEST else name + version
-        for name, version in [("streamlit", streamlit_version)]
+        name if version == LATEST else name + version for name, version in [("streamlit", streamlit_version)]
     ]
 
     session.install("pytest", ".")
