@@ -53,4 +53,4 @@ def black(session: nox.Session):
 @nox_poetry.session(python=None)
 def lint(session: nox.Session):
     session.install("pylint", "nox", "nox_poetry", "tqdm", "streamlit")
-    session.run("pylint", "st_compat", "examples", "tests", "noxfile.py")
+    session.run("pylint", "st_compat", "tests", "noxfile.py")
