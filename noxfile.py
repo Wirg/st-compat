@@ -11,7 +11,8 @@ def with_python_versions(python_versions: List[str], st_version: str):
 
 
 PYTHON_ST_TQDM_VERSIONS = (
-    with_python_versions(["3.7", "3.8", "3.9"], "~=0.65")
+    with_python_versions(["3.7"], "~=0.53")
+    + with_python_versions(["3.7", "3.8", "3.9"], "~=0.65")
     + with_python_versions(["3.7", "3.8", "3.9"], "~=1.3")
     + with_python_versions(["3.7", "3.8", "3.9", "3.10"], "~=1.8")
     + with_python_versions(["3.8", "3.9", "3.10"], "~=1.12")
