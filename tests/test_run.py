@@ -5,20 +5,19 @@ from typing import Callable
 from unittest.mock import patch, sentinel
 
 
-
 def mock_for_streamlit_context(wrapped: Callable):
     @functools.wraps(wrapped)
     def _mocked(*args, **kwargs):
         from st_compat.runtime.scriptrunner import SCRIPT_RUN_CONTEXT_ATTR_NAME
+
         with patch.object(
             threading,
             "current_thread",
             return_value=SimpleNamespace(**{SCRIPT_RUN_CONTEXT_ATTR_NAME: sentinel.script_run_context}),
         ):
             return wrapped(*args, **kwargs)
+
     return _mocked
-
-
 
 
 def test_get_script_run_ctx():
