@@ -1,3 +1,4 @@
+# pylint: disable=import-outside-toplevel
 from packaging import version
 
 from st_compat.version import st_version
