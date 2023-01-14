@@ -11,9 +11,9 @@ def with_python_versions(python_versions: List[str], st_version: str):
 
 
 PYTHON_ST_TQDM_VERSIONS = (
-    with_python_versions(["3.7", "3.8"], "==0.53.*")
-    + with_python_versions(["3.7", "3.8", "3.9"], "==0.65.*")
+    with_python_versions(["3.7", "3.8", "3.9"], "==0.65.*")
     + with_python_versions(["3.7", "3.8", "3.9"], "==1.3.*")
+    + with_python_versions(["3.7", "3.8", "3.9"], "==1.4.*")
     + with_python_versions(["3.7", "3.8", "3.9", "3.10"], "==1.8.*")
     + with_python_versions(["3.8", "3.9", "3.10"], "==1.12.*")
     + with_python_versions(["3.9", "3.10"], LATEST)
@@ -27,14 +27,8 @@ def tests(session: nox_poetry.Session, streamlit_version):
         name if version == LATEST else name + version for name, version in [("streamlit", streamlit_version)]
     ]
 
-    session.install("pytest", ".")
-    session.run("pip", "install", "-U", *dependencies_to_install_with_pip)
-    session.run("pytest")
-
-
-@nox_poetry.session(python=None)
-def coverage(session: nox.Session):
     session.install("pytest", "pytest-cov", ".")
+    session.run("pip", "install", "-U", *dependencies_to_install_with_pip)
     session.run("pytest", "--cov-fail-under=15", "--cov=st_compat", "--cov-report=xml:codecov.xml")
 
 

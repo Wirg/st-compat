@@ -1,0 +1,19 @@
+name: 'Normalize String'
+description: 'Action to normalize a string'
+inputs:
+  string_to_escape:
+    required: true
+    type: string
+    description: "String to escape (replace to keep alphanumeric characters and .,_,-)"
+outputs:
+  escaped:
+    description: "Escaped input string"
+    value: ${{ steps.escape-string.outputs.escaped }}
+
+runs:
+  using: composite
+  steps:
+    - name: Escape characters from ${{ inputs.string_to_escape }}
+      id: escape-string
+      run: echo "${{ inputs.string_to_escape }}" | sed "s/[,'~() =@*]/_/g" | awk '{print "escaped="$1}' >> $GITHUB_OUTPUT
+      shell: bash
