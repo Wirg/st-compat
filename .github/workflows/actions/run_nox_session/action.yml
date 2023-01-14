@@ -9,6 +9,10 @@ inputs:
     required: true
     type: string
     description: "name of the nox session to run"
+outputs:
+  nox_session_escape:
+    description: "Escaped nox session"
+    value: ${{ steps.escape-nox.outputs.nox_session_escape }}
 
 runs:
   using: composite
@@ -21,14 +25,15 @@ runs:
           ${{ inputs.python_version }}
           3.9
         cache: "poetry"
-    - name: Escape characters from ${{ inputs.nox_session }}
-      run: echo "${{ inputs.nox_session }}" | sed "s/[,'~()\. =]/_/g" | awk '{print "nox_session_escape="$1}' >> $GITHUB_ENV
-      shell: bash
+    - uses: ./.github/workflows/actions/normalize_string
+      id: escape-nox
+      with:
+        string_to_escape: ${{ inputs.nox_session }}
     - name: Cache .nox envdir
       uses: actions/cache@v3
       id: cache
       with:
         path: .nox
-        key: nox-envdir-${{ runner.os }}-session-${{ env.nox_session_escape }}
+        key: nox-envdir-${{ runner.os }}-session-${{ steps.escape-nox.outputs.escaped }}
     - run: poetry run nox --session "${{ inputs.nox_session }}" --reuse-existing-virtualenvs
       shell: bash

@@ -45,9 +45,18 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/workflows/actions/install_dependencies
       - uses: ./.github/workflows/actions/run_nox_session
+        id: run-nox-session
         with:
           python_version: ${{ matrix.python }}
           nox_session: ${{ matrix.session }}
+      - uses: ./.github/workflows/actions/normalize_string
+        id: escape-streamlit-version
+        with:
+          string_to_escape: ${{ matrix.call_spec.streamlit_version }}
+      - uses: codecov/codecov-action@v3
+        with:
+          files: ./codecov.xml
+          flags: pytest,python-${{ matrix.python }},st-${{ steps.escape-streamlit-version.outputs.escaped }}
 
   list_nox_format_sessions:
     # See pull_request_review
@@ -58,7 +67,7 @@ jobs:
       - uses: ./.github/workflows/actions/install_dependencies
       - name: list all format sessions
         id: format_sessions
-        run: echo "matrix=$(poetry run python commands/list_nox_manifest.py --sessions black isort lint coverage --json)" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(poetry run python commands/list_nox_manifest.py --sessions black isort lint --json)" >> $GITHUB_OUTPUT
     outputs:
       format_sessions: ${{ steps.format_sessions.outputs.matrix }}
 
@@ -78,11 +87,7 @@ jobs:
         with:
           python_version: ${{ matrix.python }}
           nox_session: ${{ matrix.session }}
-      - if: ${{ matrix.session == 'coverage'}}
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./codecov.xml
-          flags: pytest
+
 
   all_test_passed:
     # Used to easy force requirements checks in GitHub

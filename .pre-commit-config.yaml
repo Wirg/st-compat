@@ -16,15 +16,15 @@ repos:
         language: system
         types: [ python ]
         stages: [ commit ]
-      - id: flake8
-        name: Flake8 (Flake8)
-        entry: poetry run flake8 --count --select=E9,F63,F7,F82 --show-source --statistics
-        language: system
-        types: [ python ]
-        stages: [ commit ]
       - id: isort
         name: Ordering imports (isort)
         entry: poetry run isort
+        language: system
+        types: [ python ]
+        stages: [ commit ]
+      - id: pylint
+        name: Format (pylint)
+        entry: poetry run pylint
         language: system
         types: [ python ]
         stages: [ commit ]
@@ -34,4 +34,4 @@ repos:
         pass_filenames: false
         language: system
         types: [ python ]
-        stages: [ push ]
+        stages: [ commit, push ]

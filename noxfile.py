@@ -27,14 +27,8 @@ def tests(session: nox_poetry.Session, streamlit_version):
         name if version == LATEST else name + version for name, version in [("streamlit", streamlit_version)]
     ]
 
-    session.install("pytest", ".")
-    session.run("pip", "install", "-U", *dependencies_to_install_with_pip)
-    session.run("pytest")
-
-
-@nox_poetry.session(python=None)
-def coverage(session: nox.Session):
     session.install("pytest", "pytest-cov", ".")
+    session.run("pip", "install", "-U", *dependencies_to_install_with_pip)
     session.run("pytest", "--cov-fail-under=15", "--cov=st_compat", "--cov-report=xml:codecov.xml")
 
 
