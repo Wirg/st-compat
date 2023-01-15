@@ -51,3 +51,9 @@ def test_run_ctx_integration():
 
     add_script_run_ctx(ctx=sentinel.script_run_context)
     assert get_script_run_ctx() is sentinel.script_run_context
+
+
+def test_is_running_with_streamlit_out_of_streamlit():
+    from st_compat.runtime.scriptrunner import is_running_with_streamlit
+
+    assert not is_running_with_streamlit

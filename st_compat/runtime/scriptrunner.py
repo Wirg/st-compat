@@ -1,4 +1,5 @@
 from packaging import version
+from streamlit import _is_running_with_streamlit as is_running_with_streamlit
 
 from st_compat.version import st_version
 
@@ -34,5 +35,6 @@ else:
 __all__ = [
     "add_script_run_ctx",
     "get_script_run_ctx",
+    "is_running_with_streamlit",
     "SCRIPT_RUN_CONTEXT_ATTR_NAME",
 ]
