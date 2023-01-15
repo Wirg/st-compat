@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "st_compat"
-version = "0.0.1a1"
+version = "0.0.1a2"
 description = "Module to make it easier to build streamlit modules by implementing standard retro-compatiblity"
 authors = ["Wirg <Wirg@users.noreply.github.com>"]
 maintainers = ["Wirg <Wirg@users.noreply.github.com>"]
