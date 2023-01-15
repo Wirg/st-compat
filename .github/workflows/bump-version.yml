@@ -42,7 +42,7 @@ jobs:
         with:
           # PR
           title: "[Release] ${{ steps.release-data.outputs.version }} => main"
-          reviewers: Wirg
+          reviewers: ${{ github.actor }}
           labels: release
           branch: ${{ steps.release-data.outputs.branch }}
           base: main
@@ -53,11 +53,11 @@ jobs:
           add-paths: "./pyproject.toml"
 
           # Auth
-          token: ${{ secrets.GH_WIRG_PAT }}
+          token: ${{ secrets.GH_WIRG_BOT_PAT }}
 
       - name: Auto-merge Pull Request
         uses: peter-evans/enable-pull-request-automerge@v2
         with:
-          token: ${{ secrets.GH_WIRG_PAT }}
+          token: ${{ secrets.GH_WIRG_BOT_PAT }}
           pull-request-number: ${{ steps.create-pull-request.outputs.pull-request-number }}
           merge-method: rebase
