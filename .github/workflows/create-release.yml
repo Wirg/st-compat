@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.WIRG_PAT_FOR_RELEASE }}
+          token: ${{ secrets.GH_WIRG_PAT }}
 
       - uses: ./.github/workflows/actions/install_dependencies
 
@@ -52,4 +52,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish
-        run: poetry publish -n --username __token__ --password ${{ secrets.PYPI_MACHINE_TOKEN }}
+        run: poetry publish -n --username __token__ --password ${{ secrets.PYPI_WIRG_PAT }}
