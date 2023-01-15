@@ -52,4 +52,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish
-        run: poetry publish -n --username __token__ --password ${{ secrets.PYPI_TOKEN }}
+        run: poetry publish -n --username __token__ --password ${{ secrets.PYPI_MACHINE_TOKEN }}
