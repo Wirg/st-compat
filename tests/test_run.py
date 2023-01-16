@@ -56,4 +56,4 @@ def test_run_ctx_integration():
 def test_is_running_with_streamlit_out_of_streamlit():
     from st_compat.runtime.scriptrunner import is_running_with_streamlit
 
-    assert not is_running_with_streamlit
+    assert not is_running_with_streamlit()
