@@ -57,3 +57,8 @@ def test_is_running_with_streamlit_out_of_streamlit():
     from st_compat.runtime.scriptrunner import is_running_with_streamlit
 
     assert not is_running_with_streamlit()
+
+
+def test_session_state_get_set():
+    # pylint: disable=unused-import
+    from st_compat.runtime.scriptrunner import SCRIPT_RUN_CONTEXT_ATTR_NAME

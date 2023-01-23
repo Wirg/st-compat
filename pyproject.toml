@@ -60,6 +60,7 @@ disable = [
 max-line-length=140
 docstring-min-length=15
 max-args = 6
+ignore-paths = ["st_compat/state/streamlit_1_12_session_state"]
 
 [tool.pylint.miscellaneous]
 notes = ["FIXME"]
