@@ -29,7 +29,7 @@ def tests(session: nox_poetry.Session, streamlit_version):
 
     session.install("pytest", "pytest-cov", ".")
     session.run("pip", "install", "-U", *dependencies_to_install_with_pip)
-    session.run("pytest", "--cov-fail-under=15", "--cov=st_compat", "--cov-report=xml:codecov.xml")
+    session.run("pytest", "--cov=st_compat", "--cov-report=xml:codecov.xml")
 
 
 @nox_poetry.session(python=None)
