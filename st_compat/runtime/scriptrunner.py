@@ -22,14 +22,12 @@ elif st_version >= version.parse("1.4.0"):
         add_script_run_ctx,
         get_script_run_ctx,
     )
-elif st_version >= version.parse("0.65"):
+else:
     from streamlit.report_thread import (
         REPORT_CONTEXT_ATTR_NAME as SCRIPT_RUN_CONTEXT_ATTR_NAME,
     )
     from streamlit.report_thread import add_report_ctx as add_script_run_ctx
     from streamlit.report_thread import get_report_ctx as get_script_run_ctx
-else:
-    raise ModuleNotFoundError(f"Not supporting streamlit version before 0.65, found: {st_version}")
 
 
 def is_running_with_streamlit() -> bool:
